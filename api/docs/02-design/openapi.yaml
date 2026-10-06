@@ -1,0 +1,538 @@
+openapi: 3.1.0
+info:
+  title: Tareq Abuhashish Portfolio API
+  version: 1.0.0
+  summary: Public API behind the portfolio website.
+  description: |
+    Stage 2 detailed design (v0.1, 2026-10-02).
+    Traces to FR-2, FR-3, FR-5, FR-6 and NFR-2, NFR-6, NFR-7 in the Software Specification.
+
+    Conventions
+    - All responses are JSON (UTF-8). Every response carries an `X-Request-Id` header (FR-6.3).
+    - Localized fields are returned in the language given by `lang`; missing Arabic text falls back to English
+      and the response sets `Content-Language` to the language actually returned.
+    - Every error uses the `Error` schema (FR-6.2).
+    - Public GET endpoints send `Cache-Control: public, max-age=60, stale-while-revalidate=600` (NFR-2).
+    - No authentication: every endpoint is public and read-only except `POST /contact`.
+  contact:
+    name: Tareq Abuhashish
+  license:
+    name: Proprietary
+servers:
+  - url: https://api.example.com/api/v1
+    description: Production (domain decided in Stage 6, Q-2)
+  - url: http://localhost:3001/api/v1
+    description: Local development (Docker Compose)
+
+tags:
+  - name: System
+  - name: Showcase
+    description: Bounded context for what the site presents.
+  - name: Contact
+    description: Bounded context for what visitors send.
+
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      x-id: API-01
+      tags: [System]
+      summary: Liveness and database check
+      description: Used by the uptime monitor (NFR-8). Never cached.
+      responses:
+        '200':
+          description: Service and database are up.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Health' }
+              example: { status: ok, database: ok, version: 1.0.0, uptimeSeconds: 86400 }
+        '503':
+          description: Service is up but the database is unreachable.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Health' }
+              example: { status: degraded, database: down, version: 1.0.0, uptimeSeconds: 120 }
+
+  /profile:
+    get:
+      operationId: getProfile
+      x-id: API-02
+      tags: [Showcase]
+      summary: Owner profile (name, title, bios, links, CV)
+      description: Covers FR-3.1, FR-3.4, FR-7.1. Read from the profile content file, not the database.
+      parameters:
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: The profile in the requested language.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            Content-Language: { $ref: '#/components/headers/Content-Language' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Profile' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /projects:
+    get:
+      operationId: listProjects
+      x-id: API-03
+      tags: [Showcase]
+      summary: List published projects
+      description: Covers FR-2.1, FR-2.2, FR-2.4. Drafts are never returned. Sorted by `sortOrder`, then newest `publishedAt`.
+      parameters:
+        - $ref: '#/components/parameters/Lang'
+        - name: tag
+          in: query
+          description: Technology slug to filter by (FR-2.2).
+          schema: { $ref: '#/components/schemas/Slug' }
+        - name: featured
+          in: query
+          description: When true, only featured projects (max 3) for Home (FR-2.4).
+          schema: { type: boolean }
+        - name: page
+          in: query
+          schema: { type: integer, minimum: 1, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 50, default: 12 }
+      responses:
+        '200':
+          description: A page of project summaries.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            Content-Language: { $ref: '#/components/headers/Content-Language' }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/ProjectSummary' }
+                  meta: { $ref: '#/components/schemas/PageMeta' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /projects/{slug}:
+    get:
+      operationId: getProject
+      x-id: API-04
+      tags: [Showcase]
+      summary: One published project with its full case study
+      description: Covers FR-2.3.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { $ref: '#/components/schemas/Slug' }
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: The project.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            Content-Language: { $ref: '#/components/headers/Content-Language' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProjectDetail' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /technologies:
+    get:
+      operationId: listTechnologies
+      x-id: API-05
+      tags: [Showcase]
+      summary: Technologies, grouped for the skills list and project filter
+      description: Covers FR-2.2, FR-3.2.
+      parameters:
+        - name: group
+          in: query
+          schema: { $ref: '#/components/schemas/TechGroup' }
+        - name: usedInProjects
+          in: query
+          description: When true, only technologies tagged on at least one published project (for the filter chips).
+          schema: { type: boolean, default: false }
+      responses:
+        '200':
+          description: All matching technologies, ordered by group then `sortOrder`.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Technology' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /experience:
+    get:
+      operationId: listExperience
+      x-id: API-06
+      tags: [Showcase]
+      summary: Work, education, volunteer and training entries, newest first
+      description: Covers FR-3.3.
+      parameters:
+        - $ref: '#/components/parameters/Lang'
+        - name: kind
+          in: query
+          schema: { $ref: '#/components/schemas/ExperienceKind' }
+      responses:
+        '200':
+          description: Experience entries.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            Content-Language: { $ref: '#/components/headers/Content-Language' }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Experience' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /contact:
+    post:
+      operationId: submitContactMessage
+      x-id: API-07
+      tags: [Contact]
+      summary: Send a message to the owner
+      description: |
+        Covers FR-5.1 to FR-5.5 and US-07, US-08.
+        Order of checks: rate limit → JSON parse → schema validation → honeypot → store → email.
+        - Rate limit: 5 accepted submissions per IP per rolling hour, counted by salted IP hash (NFR-7).
+        - Honeypot: if `website` is non-empty the API returns 202 and stores nothing, so bots get no signal.
+        - The message is stored before the email is sent. If the email provider fails, the message is kept,
+          the failure is logged for retry, and the visitor still gets 201.
+        - CORS: only the site's own origins may call this endpoint (NFR-6).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ContactRequest' }
+            example:
+              name: Omar Haddad
+              email: omar@company.com
+              inquiryType: freelance
+              message: I need a REST API for a booking app, with an admin area.
+              locale: en
+              website: ''
+      responses:
+        '201':
+          description: Message stored.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            RateLimit-Remaining: { $ref: '#/components/headers/RateLimit-Remaining' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContactAccepted' }
+              example: { id: 3f1c2a9e-8b7d-4c21-9f0e-5a6b7c8d9e01, requestId: req_01HF8Z3K2M }
+        '202':
+          description: Honeypot filled; accepted silently and discarded.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ContactAccepted' }
+        '400':
+          description: Body is not valid JSON.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: MALFORMED_JSON, message: Request body is not valid JSON., requestId: req_01HF8Z3K2M }
+        '403':
+          description: Request came from an origin that is not allowed.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: ORIGIN_NOT_ALLOWED, message: This origin may not call this endpoint., requestId: req_01HF8Z3K2M }
+        '413':
+          description: Body larger than 16 KB.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: PAYLOAD_TOO_LARGE, message: Request body is too large., requestId: req_01HF8Z3K2M }
+        '415':
+          description: Content-Type is not application/json.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: UNSUPPORTED_MEDIA_TYPE, message: Send the body as application/json., requestId: req_01HF8Z3K2M }
+        '422':
+          description: One or more fields failed validation.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example:
+                code: VALIDATION_FAILED
+                message: Some fields need attention.
+                requestId: req_01HF8Z3K2M
+                details:
+                  - { field: email, issue: invalid_format }
+        '429':
+          description: Too many messages from this IP in the last hour.
+          headers:
+            X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+            Retry-After:
+              description: Seconds until another message is accepted.
+              schema: { type: integer, minimum: 1 }
+            RateLimit-Remaining: { $ref: '#/components/headers/RateLimit-Remaining' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              example: { code: RATE_LIMITED, message: Too many messages. Try again later., requestId: req_01HF8Z3K2M }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+components:
+  parameters:
+    Lang:
+      name: lang
+      in: query
+      description: Language of localized fields. Defaults to `en`.
+      schema: { $ref: '#/components/schemas/Locale' }
+
+  headers:
+    X-Request-Id:
+      description: Unique ID for this request; also written to the log line (FR-6.3).
+      schema: { type: string, pattern: '^req_[A-Za-z0-9]{10,32}$' }
+    Content-Language:
+      description: Language actually returned (`en` when an Arabic field fell back).
+      schema: { $ref: '#/components/schemas/Locale' }
+    RateLimit-Remaining:
+      description: Submissions this IP may still send in the current hour.
+      schema: { type: integer, minimum: 0 }
+
+  responses:
+    ValidationError:
+      description: A query or path parameter is invalid.
+      headers:
+        X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example:
+            code: VALIDATION_FAILED
+            message: Some parameters are invalid.
+            requestId: req_01HF8Z3K2M
+            details:
+              - { field: lang, issue: must_be_one_of_en_ar }
+    NotFound:
+      description: No published resource with that identifier.
+      headers:
+        X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: NOT_FOUND, message: Project not found., requestId: req_01HF8Z3K2M }
+    InternalError:
+      description: Unexpected server error. Details are logged, never returned.
+      headers:
+        X-Request-Id: { $ref: '#/components/headers/X-Request-Id' }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example: { code: INTERNAL_ERROR, message: Something went wrong on our side., requestId: req_01HF8Z3K2M }
+
+  schemas:
+    Locale:
+      type: string
+      enum: [en, ar]
+      default: en
+
+    Slug:
+      type: string
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      maxLength: 80
+
+    TechGroup:
+      type: string
+      enum: [backend, databases, architecture, frontend, other_languages, systems, devops]
+
+    ExperienceKind:
+      type: string
+      enum: [work, education, volunteer, training]
+
+    InquiryType:
+      type: string
+      enum: [job, freelance, other]
+
+    Error:
+      type: object
+      required: [code, message, requestId]
+      properties:
+        code:
+          type: string
+          enum: [VALIDATION_FAILED, MALFORMED_JSON, NOT_FOUND, ORIGIN_NOT_ALLOWED, PAYLOAD_TOO_LARGE, UNSUPPORTED_MEDIA_TYPE, RATE_LIMITED, INTERNAL_ERROR]
+        message:
+          type: string
+          description: Human-readable, safe to show. Never contains stack traces or internal details.
+        requestId: { type: string }
+        details:
+          type: array
+          description: Present for VALIDATION_FAILED only.
+          items:
+            type: object
+            required: [field, issue]
+            properties:
+              field: { type: string }
+              issue:
+                type: string
+                description: Machine-readable reason; the front end maps it to a message in the visitor's language.
+
+    Health:
+      type: object
+      required: [status, database, version, uptimeSeconds]
+      properties:
+        status: { type: string, enum: [ok, degraded] }
+        database: { type: string, enum: [ok, down] }
+        version: { type: string }
+        uptimeSeconds: { type: integer, minimum: 0 }
+
+    PageMeta:
+      type: object
+      required: [page, limit, total, totalPages]
+      properties:
+        page: { type: integer, minimum: 1 }
+        limit: { type: integer, minimum: 1 }
+        total: { type: integer, minimum: 0 }
+        totalPages: { type: integer, minimum: 0 }
+
+    Technology:
+      type: object
+      required: [slug, name, group]
+      properties:
+        slug: { $ref: '#/components/schemas/Slug' }
+        name: { type: string, example: NestJS }
+        group: { $ref: '#/components/schemas/TechGroup' }
+        primary:
+          type: boolean
+          description: Highlighted in the skills list (the "Backend · primary" card).
+
+    ProjectSummary:
+      type: object
+      required: [slug, title, summary, technologies, featured]
+      properties:
+        slug: { $ref: '#/components/schemas/Slug' }
+        title: { type: string, maxLength: 120 }
+        summary: { type: string, maxLength: 300 }
+        typeLabel: { type: string, example: Graduation project }
+        year: { type: integer, minimum: 2000, maximum: 2100 }
+        coverImageUrl: { type: [string, 'null'], format: uri }
+        featured: { type: boolean }
+        technologies:
+          type: array
+          items: { $ref: '#/components/schemas/Technology' }
+
+    ProjectDetail:
+      allOf:
+        - $ref: '#/components/schemas/ProjectSummary'
+        - type: object
+          required: [problem, decisions]
+          properties:
+            problem: { type: string }
+            role: { type: [string, 'null'] }
+            teamSize: { type: [integer, 'null'], minimum: 1 }
+            decisions:
+              type: array
+              description: Key architecture decisions, each "what, and why".
+              items: { type: string }
+            outcome: { type: [string, 'null'] }
+            repoUrl: { type: [string, 'null'], format: uri }
+            liveUrl: { type: [string, 'null'], format: uri }
+            publishedAt: { type: string, format: date-time }
+
+    Experience:
+      type: object
+      required: [id, kind, organization, role, startDate, highlights]
+      properties:
+        id: { type: string, format: uuid }
+        kind: { $ref: '#/components/schemas/ExperienceKind' }
+        organization: { type: string }
+        role: { type: string }
+        location: { type: [string, 'null'] }
+        startDate: { type: string, format: date }
+        endDate:
+          type: [string, 'null']
+          format: date
+          description: Null means ongoing.
+        highlights:
+          type: array
+          items: { type: string }
+
+    Profile:
+      type: object
+      required: [name, title, headline, shortBio, fullBio, location, links, cvUrl]
+      properties:
+        name: { type: string }
+        title: { type: string }
+        headline: { type: string }
+        shortBio: { type: string }
+        fullBio:
+          type: array
+          items: { type: string }
+          description: Paragraphs.
+        location: { type: string }
+        availability: { type: [string, 'null'] }
+        languages:
+          type: array
+          items: { $ref: '#/components/schemas/Locale' }
+        links:
+          type: object
+          properties:
+            linkedin: { type: string, format: uri }
+            github: { type: [string, 'null'], format: uri }
+        cvUrl:
+          type: string
+          description: English PDF for both locales (Q-4 resolved).
+
+    ContactRequest:
+      type: object
+      required: [name, email, inquiryType, message, locale]
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 2, maxLength: 100 }
+        email: { type: string, format: email, maxLength: 254 }
+        inquiryType: { $ref: '#/components/schemas/InquiryType' }
+        message: { type: string, minLength: 10, maxLength: 2000 }
+        locale: { $ref: '#/components/schemas/Locale' }
+        website:
+          type: string
+          maxLength: 200
+          description: Honeypot. Hidden from people; must be empty (FR-5.5).
+
+    ContactAccepted:
+      type: object
+      required: [requestId]
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Absent on 202 (honeypot) responses.
+        requestId: { type: string }
