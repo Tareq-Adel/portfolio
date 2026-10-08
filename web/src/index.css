@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+
+/*
+ * Color tokens from portfolio-api/docs/02-design/DESIGN_SYSTEM.md section 1.
+ * Dark is the default theme; light values apply under [data-theme="light"].
+ * The theme toggle itself (localStorage + script) is a later task.
+ */
+:root {
+  --bg: #070908;
+  --surface: #0e1311;
+  --chip: #15201a;
+  --nav-active: #1a2a21;
+  --ph: #111a15;
+  --text: #eef5f0;
+  --text-2: #d6e2da;
+  --muted: #a6b5ac;
+  --subtle: #8a9a90;
+  --line: #18221d;
+  --card-line: #1c2a23;
+  --line-strong: #2a3d32;
+  --input-line: #3a5244;
+  --error: #f97066;
+
+  --accent: #18a558;
+  --accent-hover: #2bc06f;
+  --on-accent: #04150b;
+  --accent-soft: #0c2618;
+  --accent-soft-line: #164229;
+  --accent-soft-text: #6fd39a;
+  --highlight: #18a558;
+  --highlight-text: #2bb866;
+  --btn-solid: #18a558;
+  --on-btn-solid: #04150b;
+}
+
+[data-theme='light'] {
+  --bg: #f6f8f6;
+  --surface: #ffffff;
+  --chip: #e9f2ec;
+  --nav-active: #dcebe1;
+  --ph: #eef3ef;
+  --text: #0a0f0c;
+  --text-2: #1c2621;
+  --muted: #45534b;
+  --subtle: #59675f;
+  --line: #dde6e0;
+  --card-line: #e1e9e4;
+  --line-strong: #c3d1c8;
+  --input-line: #afc0b5;
+  --error: #b42318;
+
+  --accent: #0e7a43;
+  --accent-hover: #0a5f34;
+  --on-accent: #ffffff;
+  --accent-soft: #dff5e8;
+  --accent-soft-line: #c2ebd3;
+  --accent-soft-text: #0a5f34;
+  --highlight: #15803d;
+  --highlight-text: #0e7a43;
+  --btn-solid: #0a0f0c;
+  --on-btn-solid: #f6f8f6;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-chip: var(--chip);
+  --color-nav-active: var(--nav-active);
+  --color-ph: var(--ph);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-card-line: var(--card-line);
+  --color-line-strong: var(--line-strong);
+  --color-input-line: var(--input-line);
+  --color-error: var(--error);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-line: var(--accent-soft-line);
+  --color-accent-soft-text: var(--accent-soft-text);
+  --color-highlight: var(--highlight);
+  --color-highlight-text: var(--highlight-text);
+  --color-btn-solid: var(--btn-solid);
+  --color-on-btn-solid: var(--on-btn-solid);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
