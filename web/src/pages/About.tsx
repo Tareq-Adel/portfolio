@@ -132,14 +132,13 @@ function About() {
       </section>
 
       <section className="mt-16 text-center">
-        {/* No CV file exists yet (FR-3.4) -- not a real link until one is published. */}
-        <button
-          type="button"
-          disabled
-          className="cursor-not-allowed rounded-full border border-line-strong px-6 py-3 font-bold text-subtle"
+        <a
+          href="/cv/tareq-abuhashish-cv.pdf"
+          download
+          className="rounded-full border border-line-strong px-6 py-3 font-bold text-text"
         >
           Download CV
-        </button>
+        </a>
       </section>
     </section>
   );
