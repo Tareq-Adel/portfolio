@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 
 import { allowedOrigins } from '../config.js';
+import { sendContactEmail } from '../email.js';
 
 const contactRequestSchema = z
   .object({
@@ -42,23 +43,6 @@ function recordSubmission(ipHash: string): void {
   const recent = submissionsByIpHash.get(ipHash) ?? [];
   recent.push(Date.now());
   submissionsByIpHash.set(ipHash, recent);
-}
-
-interface ContactMessage {
-  name: string;
-  email: string;
-  inquiryType: 'job' | 'freelance' | 'other';
-  message: string;
-  locale: 'en' | 'ar';
-}
-
-/**
- * Stand-in for a real provider (Resend/SendGrid/SMTP) -- no credentials are
- * configured yet, so this logs instead of sending. Everything around it
- * (validation, honeypot, rate limiting, response shape) is fully real.
- */
-async function sendContactEmail(message: ContactMessage): Promise<void> {
-  console.log('[contact] would send email:', message);
 }
 
 export const contactRouter: Router = Router();
