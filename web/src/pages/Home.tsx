@@ -45,7 +45,7 @@ function Home() {
       <img
         src={profilePhoto}
         alt="Tareq Abuhashish"
-        className="mx-auto aspect-[3/4] w-full max-w-sm rounded-[28px_28px_999px_999px] border-[6px] border-surface object-cover"
+        className="mx-auto aspect-[3/4] w-full max-w-sm rounded-[70%_120%_70%_120%] border-[6px] border-surface object-cover"
       />
     </main>
   );
