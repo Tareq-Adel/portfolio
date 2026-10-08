@@ -49,8 +49,8 @@ const experience = [
 
 function About() {
   return (
-    <main className="mx-auto max-w-3xl px-5 py-16">
-      <section>
+    <section id="about" className="mx-auto max-w-3xl scroll-mt-16 px-5 py-16">
+      <div>
         <h1 className="text-2xl font-medium text-text">About</h1>
         <p className="mt-6 text-lg leading-[1.65] text-text-2">
           I'm Tareq, a software engineer who enjoys the part of software that holds everything
@@ -75,7 +75,7 @@ function About() {
           Today I focus on backend engineering with Node.js, NestJS, and PostgreSQL, and on writing
           software that the next engineer will be glad to inherit.
         </p>
-      </section>
+      </div>
 
       <section className="mt-16">
         <h2 className="text-xl font-medium text-text">Skills</h2>
@@ -141,7 +141,7 @@ function About() {
           Download CV
         </button>
       </section>
-    </main>
+    </section>
   );
 }
 
