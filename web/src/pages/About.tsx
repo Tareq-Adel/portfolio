@@ -81,7 +81,10 @@ function About() {
         <h2 className="text-xl font-medium text-text">Skills</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {skillGroups.map((group) => (
-            <div key={group.name} className="rounded-[24px] border border-card-line p-4">
+            <div
+              key={group.name}
+              className="rounded-[24px] border border-card-line p-4 transition duration-300 motion-safe:hover:-translate-y-1.5 motion-safe:hover:border-accent motion-safe:hover:shadow-lg"
+            >
               <h3 className="text-sm font-bold text-accent">{group.name}</h3>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
