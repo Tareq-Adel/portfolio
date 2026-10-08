@@ -4,7 +4,7 @@ import profilePhoto from '../assets/profile.jpg';
 
 function Home() {
   return (
-    <main className="mx-auto grid min-h-[calc(100svh-64px)] max-w-5xl grid-cols-1 items-center gap-10 px-5 py-12 md:grid-cols-2">
+    <main className="mx-auto grid min-h-[calc(100svh-64px)] max-w-5xl grid-cols-1 items-center gap-10 px-5 py-12 md:grid-cols-2 md:gap-24">
       <div className="flex flex-col items-start gap-6 text-left">
         <p className="text-sm font-bold tracking-[0.06em] text-accent uppercase">
           Welcome to my portfolio
