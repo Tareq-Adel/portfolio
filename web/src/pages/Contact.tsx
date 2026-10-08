@@ -34,7 +34,7 @@ function Contact() {
           inquiryType: data.get('inquiryType'),
           message: data.get('message'),
           locale: 'en',
-          website: data.get('website'),
+          website: data.get('hp_field'),
         }),
       });
 
@@ -72,10 +72,13 @@ function Contact() {
       </p>
 
       <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-5" noValidate>
-        {/* Honeypot: hidden from people, must stay empty. Bots that fill every field trip this. */}
+        {/* Honeypot: hidden from people, must stay empty. Bots that fill every field trip
+            this. Field name deliberately avoids words like "website"/"url"/"company" --
+            those trigger browser autofill even on a visually hidden, off-screen field,
+            which caused real users' submissions to silently fail. */}
         <div className="absolute -left-[9999px]" aria-hidden="true">
-          <label htmlFor="website">Leave this field empty</label>
-          <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+          <label htmlFor="hp_field">Leave this field empty</label>
+          <input type="text" id="hp_field" name="hp_field" tabIndex={-1} autoComplete="off" />
         </div>
 
         <div className="flex flex-col gap-2">
