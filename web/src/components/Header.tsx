@@ -9,6 +9,7 @@ const navLinks = [
 
 function Header() {
   const [activeId, setActiveId] = useState('home');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const sections = navLinks
@@ -36,17 +37,66 @@ function Header() {
     return () => observer.disconnect();
   }, []);
 
+  function linkClass(id: string) {
+    return `text-sm font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
+  }
+
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center justify-center gap-6 border-b border-line bg-bg">
-      {navLinks.map((link) => (
-        <a
-          key={link.id}
-          href={`#${link.id}`}
-          className={`text-sm font-semibold ${activeId === link.id ? 'text-accent' : 'text-muted'}`}
+    <header className="sticky top-0 z-10 border-b border-line bg-bg">
+      <div className="flex h-16 items-center justify-between px-5 md:justify-center md:gap-6">
+        {/* >=768px: every link inline, per DESIGN_SYSTEM.md's 768px breakpoint. */}
+        <nav className="hidden md:flex md:items-center md:gap-6">
+          {navLinks.map((link) => (
+            <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* <768px: Contact stays visible, everything else collapses behind the menu button
+            (SITEMAP.md section 5). */}
+        <div className="flex w-full items-center justify-between md:hidden">
+          <a href="#contact" className={linkClass('contact')}>
+            Contact
+          </a>
+          <button
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5"
+          >
+            <span
+              className={`h-0.5 w-5 bg-text transition-transform ${menuOpen ? 'translate-y-2 rotate-45' : ''}`}
+            />
+            <span className={`h-0.5 w-5 bg-text ${menuOpen ? 'opacity-0' : ''}`} />
+            <span
+              className={`h-0.5 w-5 bg-text transition-transform ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`}
+            />
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <nav
+          id="mobile-menu"
+          className="flex flex-col items-center gap-4 border-t border-line py-4 md:hidden"
         >
-          {link.label}
-        </a>
-      ))}
+          {navLinks
+            .filter((link) => link.id !== 'contact')
+            .map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setMenuOpen(false)}
+                className={linkClass(link.id)}
+              >
+                {link.label}
+              </a>
+            ))}
+        </nav>
+      )}
     </header>
   );
 }
