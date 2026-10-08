@@ -20,8 +20,11 @@ function Home() {
           Clean APIs. Solid data. Built to scale.
         </p>
         <nav className="flex flex-wrap items-center gap-3">
+          {/* No Projects section right now -- links to GitHub instead until it's back. */}
           <a
-            href="#projects"
+            href="https://github.com/Tareq-Adel"
+            target="_blank"
+            rel="noreferrer"
             className="rounded-full bg-btn-solid px-6 py-3 font-bold text-on-btn-solid"
           >
             View my work
