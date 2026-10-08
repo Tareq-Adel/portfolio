@@ -4,6 +4,7 @@ import express from 'express';
 
 import { allowedOrigins } from './config.js';
 import { contactRouter } from './routes/contact.js';
+import { profileRouter } from './routes/profile.js';
 
 const app = express();
 const port = process.env.PORT ?? 3001;
@@ -57,6 +58,7 @@ app.get('/api/v1/health', (_req, res) => {
 });
 
 app.use('/api/v1', contactRouter);
+app.use('/api/v1', profileRouter);
 
 app.listen(port, () => {
   console.log(`portfolio-api listening on http://localhost:${port}`);
