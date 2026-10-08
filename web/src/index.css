@@ -87,6 +87,11 @@
   --color-highlight-text: var(--highlight-text);
   --color-btn-solid: var(--btn-solid);
   --color-on-btn-solid: var(--on-btn-solid);
+
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'Manrope', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
 }
 
 html {
@@ -97,4 +102,5 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  font-family: var(--font-sans);
 }
