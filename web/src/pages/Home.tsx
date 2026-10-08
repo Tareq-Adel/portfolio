@@ -6,17 +6,17 @@ function Home() {
   return (
     <main className="mx-auto grid min-h-[calc(100svh-64px)] max-w-5xl grid-cols-1 items-center gap-10 px-5 py-12 md:grid-cols-2">
       <div className="flex flex-col items-start gap-6 text-left">
+        <p className="text-sm font-bold tracking-[0.06em] text-accent uppercase">
+          Welcome to my portfolio
+        </p>
         <h1 className="font-serif text-[clamp(40px,6vw,72px)] leading-[0.98] font-medium text-text">
-          Backend Software Engineer building reliable systems.
+          Backend Engineer building reliable, scalable systems.
         </h1>
         <span className="rounded-full border border-line-strong px-5 py-2 text-sm font-semibold text-text">
           Tareq Abuhashish / Software Engineer
         </span>
         <p className="max-w-md text-[clamp(16px,1.4vw,18px)] leading-[1.55] text-muted">
-          {/* Sub-headline: CONTENT.md leaves this as an open choice (A/B/C) — using option A as a
-              placeholder until it's confirmed. */}
-          I design the parts of software you don't see: clean APIs, solid data models, and
-          architecture built to grow.
+          Clean APIs. Solid data. Built to scale.
         </p>
         <nav className="flex flex-wrap items-center gap-3">
           <Link
