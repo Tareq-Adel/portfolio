@@ -105,16 +105,18 @@
 |---|---|---|
 | Email | tareq212adel@gmail.com | Via contact form (FR-5); address optional |
 | LinkedIn | linkedin.com/in/tareq-adel | Yes |
-| GitHub | `[TBD]` | Yes |
+| GitHub | github.com/Tareq-Adel | Yes |
 | Phone / WhatsApp | +972-592126708 | `[TBD]` Not recommended publicly (spam); keep on the downloadable CV only |
 
 ---
 
 ## 8. Open items for this content
-1. GitHub profile URL
-2. Concrete achievements for Sahab (and stack for Areisto)
+1. ~~GitHub profile URL~~ Resolved: github.com/Tareq-Adel
+2. Concrete achievements for Sahab (stack for Areisto is resolved: Full Stack Node.js,
+   Graduates Empowerment Program – Season 2, 90 hours -- see the Areisto entry in section 4)
 3. DevOps / tools you use
 4. Availability statement (remote? freelance? full-time?)
-5. Profile photo (yes/no)
-6. Sub-headline choice (A, B, or C)
+5. ~~Profile photo (yes/no)~~ Resolved: yes, in use on the Home section
+6. ~~Sub-headline choice (A, B, or C)~~ Resolved with new copy, not one of the three options:
+   "Clean APIs. Solid data. Built to scale."
 7. Rewrite the CV itself for job applications? The current summary targets a Master's program.
