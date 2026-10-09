@@ -43,7 +43,13 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-bg">
-      <div className="flex h-16 items-center justify-between px-5 md:justify-center md:gap-6">
+      <div className="flex h-16 items-center justify-between px-5">
+        {/* <768px: name on the left (brand slot); Contact stays visible, everything else
+            collapses behind the menu button (SITEMAP.md section 5). */}
+        <a href="#home" className="text-sm font-bold text-text md:hidden">
+          Tareq Abuhashish
+        </a>
+
         {/* >=768px: every link inline, per DESIGN_SYSTEM.md's 768px breakpoint. */}
         <nav className="hidden md:flex md:items-center md:gap-6">
           {navLinks.map((link) => (
@@ -53,9 +59,12 @@ function Header() {
           ))}
         </nav>
 
-        {/* <768px: Contact stays visible, everything else collapses behind the menu button
-            (SITEMAP.md section 5). */}
-        <div className="flex w-full items-center justify-between md:hidden">
+        {/* Name on the right at desktop width. */}
+        <a href="#home" className="hidden text-sm font-bold text-text md:block">
+          Tareq Abuhashish
+        </a>
+
+        <div className="flex items-center gap-4 md:hidden">
           <a href="#contact" className={linkClass('contact')}>
             Contact
           </a>
