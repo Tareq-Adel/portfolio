@@ -38,7 +38,7 @@ function Header() {
   }, []);
 
   function linkClass(id: string) {
-    return `text-base font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
+    return `px-3 py-2 text-base font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
   }
 
   return (
@@ -55,7 +55,7 @@ function Header() {
         <a href="#home" className="hidden pl-4 text-2xl font-bold text-accent md:block">
           Tareq Abuhashish
         </a>
-        <nav className="hidden items-center gap-6 px-4 md:flex">
+        <nav className="hidden items-center gap-1 px-4 md:flex">
           {navLinks.map((link) => (
             <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
               {link.label}
