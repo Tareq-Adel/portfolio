@@ -43,7 +43,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-bg">
-      <div className="flex h-20 items-center justify-between px-5">
+      <div className="flex h-20 items-center justify-between px-10">
         {/* <768px: name on the left (brand slot); Contact stays visible, everything else
             collapses behind the menu button (SITEMAP.md section 5). */}
         <a href="#home" className="pl-4 text-lg font-bold text-accent md:hidden">
