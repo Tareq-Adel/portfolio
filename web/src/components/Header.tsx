@@ -25,10 +25,10 @@ function Header() {
           setActiveId(mostVisible.target.id);
         }
       },
-      // 64px accounts for the sticky header; -60% keeps a section "active"
+      // 80px accounts for the sticky header; -60% keeps a section "active"
       // only while it's in the upper half of the viewport, not the instant
       // it first peeks in at the bottom.
-      { rootMargin: '-64px 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
+      { rootMargin: '-80px 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
 
     for (const section of sections) {
@@ -38,31 +38,32 @@ function Header() {
   }, []);
 
   function linkClass(id: string) {
-    return `text-sm font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
+    return `text-base font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
   }
 
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-bg">
-      <div className="flex h-16 items-center justify-between px-5">
+      <div className="flex h-20 items-center justify-between px-5">
         {/* <768px: name on the left (brand slot); Contact stays visible, everything else
             collapses behind the menu button (SITEMAP.md section 5). */}
-        <a href="#home" className="text-sm font-bold text-text md:hidden">
+        <a href="#home" className="text-base font-bold text-text md:hidden">
           Tareq Abuhashish
         </a>
 
-        {/* >=768px: every link inline, per DESIGN_SYSTEM.md's 768px breakpoint. */}
-        <nav className="hidden md:flex md:items-center md:gap-6">
-          {navLinks.map((link) => (
-            <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Name on the right at desktop width. */}
-        <a href="#home" className="hidden text-sm font-bold text-text md:block">
-          Tareq Abuhashish
-        </a>
+        {/* >=768px: name + nav grouped together on the left, per DESIGN_SYSTEM.md's
+            768px breakpoint. */}
+        <div className="hidden items-center gap-8 md:flex">
+          <a href="#home" className="text-lg font-bold text-text">
+            Tareq Abuhashish
+          </a>
+          <nav className="flex items-center gap-6">
+            {navLinks.map((link) => (
+              <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </div>
 
         <div className="flex items-center gap-4 md:hidden">
           <a href="#contact" className={linkClass('contact')}>

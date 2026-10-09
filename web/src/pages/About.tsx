@@ -49,7 +49,7 @@ const experience = [
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-3xl scroll-mt-16 px-5 py-16">
+    <section id="about" className="mx-auto max-w-3xl scroll-mt-20 px-5 py-16">
       <div>
         <h1 className="text-2xl font-medium text-text">About</h1>
         <p className="mt-6 text-lg leading-[1.65] text-text-2">

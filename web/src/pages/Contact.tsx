@@ -65,7 +65,7 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-xl scroll-mt-16 px-5 py-20">
+    <section id="contact" className="mx-auto max-w-xl scroll-mt-20 px-5 py-20">
       <h1 className="text-center text-2xl font-medium text-text">Contact</h1>
       <p className="mt-2 text-center text-muted">
         Have a role, a project, or a question? Send a message below.
