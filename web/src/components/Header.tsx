@@ -55,7 +55,7 @@ function Header() {
         <a href="#home" className="hidden pl-4 text-2xl font-bold text-accent md:block">
           Tareq Abuhashish
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 px-4 md:flex">
           {navLinks.map((link) => (
             <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
               {link.label}
