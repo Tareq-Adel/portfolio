@@ -50,20 +50,18 @@ function Header() {
           Tareq Abuhashish
         </a>
 
-        {/* >=768px: name + nav grouped together on the left, per DESIGN_SYSTEM.md's
+        {/* >=768px: name on the left, nav on the right, per DESIGN_SYSTEM.md's
             768px breakpoint. */}
-        <div className="hidden items-center gap-8 md:flex">
-          <a href="#home" className="text-lg font-bold text-text">
-            Tareq Abuhashish
-          </a>
-          <nav className="flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
+        <a href="#home" className="hidden text-lg font-bold text-text md:block">
+          Tareq Abuhashish
+        </a>
+        <nav className="hidden items-center gap-6 md:flex">
+          {navLinks.map((link) => (
+            <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
         <div className="flex items-center gap-4 md:hidden">
           <a href="#contact" className={linkClass('contact')}>
