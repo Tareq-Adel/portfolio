@@ -46,13 +46,13 @@ function Header() {
       <div className="flex h-20 items-center justify-between px-5">
         {/* <768px: name on the left (brand slot); Contact stays visible, everything else
             collapses behind the menu button (SITEMAP.md section 5). */}
-        <a href="#home" className="text-base font-bold text-text md:hidden">
+        <a href="#home" className="pl-4 text-lg font-bold text-accent md:hidden">
           Tareq Abuhashish
         </a>
 
         {/* >=768px: name on the left, nav on the right, per DESIGN_SYSTEM.md's
             768px breakpoint. */}
-        <a href="#home" className="hidden text-lg font-bold text-text md:block">
+        <a href="#home" className="hidden pl-4 text-2xl font-bold text-accent md:block">
           Tareq Abuhashish
         </a>
         <nav className="hidden items-center gap-6 md:flex">
