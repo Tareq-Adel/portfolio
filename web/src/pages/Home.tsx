@@ -4,7 +4,7 @@ function Home() {
   return (
     <section
       id="home"
-      className="mx-auto grid w-[90%] min-h-[calc(100svh-80px)] scroll-mt-20 grid-cols-1 items-center gap-10 py-12 md:w-[70%] md:grid-cols-2 md:gap-40"
+      className="mx-auto grid w-[90%] min-h-[calc(100svh-80px)] scroll-mt-20 grid-cols-1 items-center gap-10 py-12 md:w-[70%] md:grid-cols-[3fr_2fr] md:gap-40"
     >
       <div className="flex flex-col items-start gap-6 text-left">
         <p className="text-sm font-bold tracking-[0.06em] text-accent uppercase">
