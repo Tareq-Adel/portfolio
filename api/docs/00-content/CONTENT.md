@@ -106,6 +106,7 @@
 | Email | tareq212adel@gmail.com | Via contact form (FR-5); address optional |
 | LinkedIn | linkedin.com/in/tareq-adel-15ab19246 | Yes |
 | GitHub | github.com/Tareq-Adel | Yes |
+| Instagram | instagram.com/tareq_ab7shish | Yes |
 | Phone / WhatsApp | +972-592126708 | `[TBD]` Not recommended publicly (spam); keep on the downloadable CV only |
 
 ---

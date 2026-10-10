@@ -1,6 +1,7 @@
 const links = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tareq-adel-15ab19246/', external: true },
   { label: 'GitHub', href: 'https://github.com/Tareq-Adel', external: true },
+  { label: 'Instagram', href: 'https://www.instagram.com/tareq_ab7shish/', external: true },
   { label: 'Email', href: '#contact', external: false },
 ];
 

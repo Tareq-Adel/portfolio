@@ -11,7 +11,7 @@ function Home() {
           Welcome to my portfolio
         </p>
         <h1 className="font-serif text-[clamp(40px,6vw,72px)] leading-[0.98] font-medium text-text">
-          Backend Engineer building reliable, scalable systems.
+          Software Engineer building reliable, scalable systems.
         </h1>
         <span className="rounded-full border border-line-strong px-4 py-1.5 text-xs font-semibold text-text sm:px-5 sm:py-2 sm:text-sm">
           Tareq Abuhashish / Software Engineer
