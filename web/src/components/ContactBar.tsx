@@ -7,13 +7,13 @@ const links = [
 
 function ContactBar() {
   return (
-    <div className="border-b border-line bg-chip px-10 py-2">
-      <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+    <div className="border-b border-line bg-chip px-10 py-3">
+      <nav className="flex flex-wrap items-center justify-center gap-3">
         {links.map((link) => (
           <a
             key={link.label}
             href={link.href}
-            className="text-xs font-semibold text-muted hover:text-accent"
+            className="rounded-full border border-transparent px-4 py-1.5 text-sm font-semibold text-text-2 transition duration-200 hover:border-accent-soft-line hover:bg-accent-soft hover:text-accent-soft-text"
             {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
           >
             {link.label}
