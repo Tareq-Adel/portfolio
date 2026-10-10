@@ -49,8 +49,8 @@ const experience = [
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-3xl scroll-mt-20 px-5 py-16">
-      <div>
+    <section id="about" className="mx-auto w-[90%] scroll-mt-20 py-16 md:w-[70%]">
+      <div className="max-w-3xl">
         <h1 className="text-2xl font-medium text-text">About</h1>
         <p className="mt-6 text-lg leading-[1.65] text-text-2">
           I'm Tareq, a software engineer who enjoys the part of software that holds everything
@@ -79,7 +79,7 @@ function About() {
 
       <section className="mt-16">
         <h2 className="text-xl font-medium text-text">Skills</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group) => (
             <div
               key={group.name}

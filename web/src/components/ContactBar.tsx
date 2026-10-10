@@ -7,8 +7,8 @@ const links = [
 
 function ContactBar() {
   return (
-    <div className="border-b border-line bg-chip px-10 py-3">
-      <nav className="flex flex-wrap items-center justify-center gap-3">
+    <div className="border-b border-line bg-chip py-3">
+      <nav className="mx-auto flex w-[90%] flex-wrap items-center justify-center gap-3 md:w-[70%]">
         {links.map((link) => (
           <a
             key={link.label}
