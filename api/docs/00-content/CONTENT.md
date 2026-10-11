@@ -91,7 +91,7 @@
 | **Backend** (primary) | Node.js, TypeScript, NestJS, Express, RESTful API design |
 | **Databases** | PostgreSQL, MongoDB, schema design, query optimization |
 | **Architecture** | Domain-Driven Design, Layered Architecture, MVC |
-| **Frontend** | React, JavaScript |
+| **Frontend** | React, Next.js, JavaScript |
 | **Other languages** | Java, Python, C, C++, Rust |
 | **Systems** | Assembly, memory management, CPU architecture, OS concepts |
 | **DevOps & Tools** | `[TBD]` Git, Docker, testing frameworks, cloud/hosting, CI |

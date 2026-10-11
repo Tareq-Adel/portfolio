@@ -2,7 +2,7 @@ const skillGroups = [
   { name: 'Backend', skills: ['Node.js', 'TypeScript', 'NestJS', 'Express', 'RESTful API design'] },
   { name: 'Databases', skills: ['PostgreSQL', 'MongoDB', 'schema design', 'query optimization'] },
   { name: 'Architecture', skills: ['Domain-Driven Design', 'Layered Architecture', 'MVC'] },
-  { name: 'Frontend', skills: ['React', 'JavaScript'] },
+  { name: 'Frontend', skills: ['React', 'Next.js', 'JavaScript'] },
   { name: 'Other languages', skills: ['Java', 'Python', 'C', 'C++', 'Rust'] },
   { name: 'Systems', skills: ['Assembly', 'memory management', 'CPU architecture', 'OS concepts'] },
   {
