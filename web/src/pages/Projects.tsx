@@ -12,8 +12,6 @@ const projects = [
     outcome:
       'Admin dashboard with analytics, Stripe checkout, order cancellation & refunds, and Google Maps integration on the frontend.',
     stack: ['Node.js', 'TypeScript', 'Express', 'Sequelize', 'MySQL', 'Stripe', 'React', 'MUI'],
-    href: 'https://github.com/mohanadft/Ecommerce',
-    note: null,
   },
   {
     title: 'Git Branch CLI',
@@ -26,8 +24,6 @@ const projects = [
       'Hand-rolled the arrow-key terminal navigation instead of pulling in a prompt library. Remote branch checkout creates a properly tracked local branch instead of leaving the user in a detached HEAD.',
     outcome: 'A global `mycheck` command that works in any local git repository.',
     stack: ['Node.js', 'TypeScript', 'chalk'],
-    href: 'https://github.com/Tareq-Adel/mycheck-git-cli-tool',
-    note: null,
   },
   {
     title: 'ARSL — Hospital Patient Platform',
@@ -40,8 +36,6 @@ const projects = [
     outcome:
       'Patients can message and call hospital staff directly, and view and book doctor appointments online.',
     stack: ['Node.js', 'NestJS', 'React'],
-    href: null,
-    note: 'Closed-source client project',
   },
   {
     title: 'Organization Task Distribution System',
@@ -55,8 +49,6 @@ const projects = [
       'Structured the codebase with MVC and Domain-Driven Design to keep business logic isolated, testable, and ready to scale.',
     outcome: null,
     stack: ['Node.js'],
-    href: null,
-    note: 'Internal enterprise project, not open source',
   },
   {
     title: 'Problem Solving & Algorithms',
@@ -66,9 +58,7 @@ const projects = [
     role: null,
     decisions: null,
     outcome: null,
-    stack: ['JavaScript'],
-    href: null,
-    note: null,
+    stack: ['JavaScript', 'TypeScript', 'Java', 'Rust', 'Python'],
   },
 ];
 
@@ -123,19 +113,6 @@ function Projects() {
                 </li>
               ))}
             </ul>
-
-            {project.href ? (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-block rounded-full border border-line-strong px-5 py-2 text-sm font-semibold text-text hover:border-accent hover:text-accent"
-              >
-                View repo
-              </a>
-            ) : (
-              project.note && <p className="mt-5 text-xs text-subtle">{project.note}</p>
-            )}
           </div>
         ))}
       </div>

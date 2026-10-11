@@ -13,8 +13,8 @@ function App() {
       <ContactBar />
       <main>
         <Home />
-        <Projects />
         <About />
+        <Projects />
         <Contact />
       </main>
       <Footer />
