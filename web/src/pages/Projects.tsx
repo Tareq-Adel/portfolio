@@ -1,5 +1,21 @@
 const projects = [
   {
+    title: 'CORAL Store',
+    type: 'Graduation project — built with a partner',
+    summary:
+      'A full e-commerce platform: product catalog, Stripe checkout, order management, and an admin dashboard.',
+    problem:
+      'The thesis goal was an e-commerce platform addressing the limitations of traditional retail with a scalable, secure, seamless shopping experience.',
+    role: 'Bachelor thesis, co-built with a partner (mohanadft) -- backend and data layer.',
+    decisions:
+      'Sequelize + MySQL for relational product/order data, JWT + Passport for auth, Stripe for payments, Cloudinary for image hosting, Joi for request validation.',
+    outcome:
+      'Admin dashboard with analytics, Stripe checkout, order cancellation & refunds, and Google Maps integration on the frontend.',
+    stack: ['Node.js', 'TypeScript', 'Express', 'Sequelize', 'MySQL', 'Stripe', 'React', 'MUI'],
+    href: 'https://github.com/mohanadft/Ecommerce',
+    note: null,
+  },
+  {
     title: 'Git Branch CLI',
     type: 'Personal tool',
     summary: 'Interactive terminal tool for switching Git branches without memorizing names.',
