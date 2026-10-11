@@ -1,4 +1,5 @@
 import ContactBar from './components/ContactBar';
+import Divider from './components/Divider';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import About from './pages/About';
@@ -13,8 +14,11 @@ function App() {
       <ContactBar />
       <main>
         <Home />
+        <Divider />
         <About />
+        <Divider />
         <Projects />
+        <Divider />
         <Contact />
       </main>
       <Footer />
