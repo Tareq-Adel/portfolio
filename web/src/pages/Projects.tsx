@@ -65,7 +65,7 @@ const projects = [
 function Projects() {
   return (
     <section id="projects" className="mx-auto w-[90%] scroll-mt-20 py-16 md:w-[85%]">
-      <h1 className="text-2xl font-medium text-text">Projects</h1>
+      <h2 className="text-2xl font-medium text-text">Projects</h2>
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {projects.map((project) => (
           <div
@@ -75,7 +75,7 @@ function Projects() {
             <p className="text-xs font-bold tracking-[0.06em] text-accent uppercase">
               {project.type}
             </p>
-            <h2 className="mt-2 font-serif text-xl font-medium text-text">{project.title}</h2>
+            <h3 className="mt-2 font-serif text-xl font-medium text-text">{project.title}</h3>
             <p className="mt-2 text-sm leading-[1.6] text-text-2">{project.summary}</p>
 
             {project.problem && (

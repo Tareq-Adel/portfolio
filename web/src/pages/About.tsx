@@ -51,7 +51,7 @@ function About() {
   return (
     <section id="about" className="mx-auto w-[90%] scroll-mt-20 py-16 md:w-[60%]">
       <div className="max-w-3xl">
-        <h1 className="text-2xl font-medium text-text">About</h1>
+        <h2 className="text-2xl font-medium text-text">About</h2>
         <p className="mt-6 text-lg leading-[1.65] text-text-2">
           I'm Tareq, a software engineer who enjoys the part of software that holds everything
           together: the APIs, the data, and the architecture underneath.
@@ -78,14 +78,14 @@ function About() {
       </div>
 
       <section className="mt-16">
-        <h2 className="text-xl font-medium text-text">Skills</h2>
+        <h3 className="text-xl font-medium text-text">Skills</h3>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group) => (
             <div
               key={group.name}
               className="rounded-[24px] border border-card-line p-4 transition duration-300 motion-safe:hover:-translate-y-1.5 motion-safe:hover:border-accent motion-safe:hover:shadow-lg"
             >
-              <h3 className="text-sm font-bold text-accent">{group.name}</h3>
+              <h4 className="text-sm font-bold text-accent">{group.name}</h4>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
                   <li key={skill} className="rounded-full bg-chip px-3 py-1 text-sm text-text-2">
@@ -99,11 +99,11 @@ function About() {
       </section>
 
       <section className="mt-16">
-        <h2 className="text-xl font-medium text-text">Experience</h2>
+        <h3 className="text-xl font-medium text-text">Experience</h3>
         <ol className="mt-6 space-y-8 border-s-2 border-line ps-6">
           {experience.map((item) => (
             <li key={item.role}>
-              <h3 className="font-semibold text-text">{item.role}</h3>
+              <h4 className="font-semibold text-text">{item.role}</h4>
               <p className="text-sm text-subtle">{item.dates}</p>
               <ul className="mt-2 list-disc space-y-1 ps-5 text-muted">
                 {item.highlights.map((highlight) => (
@@ -116,11 +116,11 @@ function About() {
       </section>
 
       <section className="mt-16">
-        <h2 className="text-xl font-medium text-text">Education</h2>
+        <h3 className="text-xl font-medium text-text">Education</h3>
         <div className="mt-6">
-          <h3 className="font-semibold text-text">
+          <h4 className="font-semibold text-text">
             BSc in Software Engineering — Al-Azhar University, Gaza
-          </h3>
+          </h4>
           <p className="text-sm text-subtle">Oct 2020 – Apr 2025 · Second Class Honours (85.19%)</p>
           <p className="mt-2 text-muted">
             Graduation project: CORAL Store, an e-commerce platform designed for a scalable, secure,

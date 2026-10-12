@@ -38,7 +38,9 @@ function Header() {
   }, []);
 
   function linkClass(id: string) {
-    return `px-3 py-2 text-base font-semibold ${activeId === id ? 'text-accent' : 'text-muted'}`;
+    return `px-3 py-2 text-base font-semibold underline-offset-4 ${
+      activeId === id ? 'text-accent underline' : 'text-muted'
+    }`;
   }
 
   return (
@@ -57,14 +59,23 @@ function Header() {
         </a>
         <nav className="hidden items-center gap-1 px-4 md:flex">
           {navLinks.map((link) => (
-            <a key={link.id} href={`#${link.id}`} className={linkClass(link.id)}>
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              aria-current={activeId === link.id ? 'true' : undefined}
+              className={linkClass(link.id)}
+            >
               {link.label}
             </a>
           ))}
         </nav>
 
         <div className="flex items-center gap-4 md:hidden">
-          <a href="#contact" className={linkClass('contact')}>
+          <a
+            href="#contact"
+            aria-current={activeId === 'contact' ? 'true' : undefined}
+            className={linkClass('contact')}
+          >
             Contact
           </a>
           <button
@@ -98,6 +109,7 @@ function Header() {
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => setMenuOpen(false)}
+                aria-current={activeId === link.id ? 'true' : undefined}
                 className={linkClass(link.id)}
               >
                 {link.label}

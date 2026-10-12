@@ -104,9 +104,9 @@ function Contact() {
               Get in touch
             </span>
           </div>
-          <h1 className="mt-6 font-serif text-[clamp(32px,4vw,48px)] leading-[1.05] font-medium text-text">
+          <h2 className="mt-6 font-serif text-[clamp(32px,4vw,48px)] leading-[1.05] font-medium text-text">
             Let's Work Together
-          </h1>
+          </h2>
           <p className="mt-6 max-w-md leading-[1.65] text-muted">
             Have a role, a project, or a question in mind? I'd love to hear from you.
           </p>
@@ -191,7 +191,7 @@ function Contact() {
 
         {/* Right: the form, as a card */}
         <div className="rounded-[24px] border border-card-line bg-surface p-6 sm:p-8">
-          <h2 className="text-xl font-bold text-text">Send a Message</h2>
+          <h3 className="text-xl font-bold text-text">Send a Message</h3>
 
           <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-5" noValidate>
             {/* Honeypot: hidden from people, must stay empty. Bots that fill every field trip
