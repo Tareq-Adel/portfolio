@@ -1,0 +1,55 @@
+[
+  {
+    "id": "923ca1d4-8519-429e-8787-7139aa6a3889",
+    "kind": "training",
+    "organization": "Areisto Software Company",
+    "role": "Software Engineering Trainee",
+    "location": "Gaza, Palestine",
+    "startDate": "2025-04-01",
+    "endDate": "2025-07-31",
+    "highlights": [
+      "Built backend services and data-management modules for enterprise applications, including a task distribution system for organizations.",
+      "Structured the codebase with MVC and Domain-Driven Design to keep business logic isolated, testable, and ready to scale.",
+      "Completed the Graduates Empowerment Program – Season 2 (Capable track): a 90-hour Full Stack Node.js training."
+    ]
+  },
+  {
+    "id": "2e6c6655-8572-4956-a365-cb073db01ecc",
+    "kind": "work",
+    "organization": "Sahab Company",
+    "role": "Software Engineer",
+    "location": "Gaza, Palestine",
+    "startDate": "2023-01-01",
+    "endDate": "2024-12-31",
+    "highlights": [
+      "Designed, developed, and maintained software solutions across multiple domains, working on both frontend and backend.",
+      "Applied software engineering practices throughout the lifecycle, from design to maintenance."
+    ]
+  },
+  {
+    "id": "c91ff97f-cfc6-4a30-a3d0-2dc75abba302",
+    "kind": "volunteer",
+    "organization": "Maghazi Community Rehabilitation Society",
+    "role": "IT Volunteer",
+    "location": "Gaza, Palestine",
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "highlights": [
+      "Supported the development of data-collection and reporting tools that streamlined how programs track their work.",
+      "Trained staff in core digital tools, helping the team manage beneficiary and program information more effectively."
+    ]
+  },
+  {
+    "id": "5b8d4209-793d-414e-823c-2fc55c4eebef",
+    "kind": "training",
+    "organization": "Gaza Sky Geeks",
+    "role": "Full-Stack Bootcamp Graduate",
+    "location": "Gaza, Palestine",
+    "startDate": "2022-10-01",
+    "endDate": "2022-10-31",
+    "highlights": [
+      "Completed intensive training in full-stack web development with JavaScript and Node.js.",
+      "Built and deployed team projects using agile workflows."
+    ]
+  }
+]

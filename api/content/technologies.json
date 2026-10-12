@@ -1,0 +1,37 @@
+[
+  { "slug": "nodejs", "name": "Node.js", "group": "backend", "primary": true },
+  { "slug": "typescript", "name": "TypeScript", "group": "backend" },
+  { "slug": "nestjs", "name": "NestJS", "group": "backend" },
+  { "slug": "express", "name": "Express", "group": "backend" },
+  { "slug": "rest-api-design", "name": "RESTful API design", "group": "backend" },
+
+  { "slug": "postgresql", "name": "PostgreSQL", "group": "databases" },
+  { "slug": "mongodb", "name": "MongoDB", "group": "databases" },
+  { "slug": "schema-design", "name": "schema design", "group": "databases" },
+  { "slug": "query-optimization", "name": "query optimization", "group": "databases" },
+
+  { "slug": "ddd", "name": "Domain-Driven Design", "group": "architecture" },
+  { "slug": "layered-architecture", "name": "Layered Architecture", "group": "architecture" },
+  { "slug": "mvc", "name": "MVC", "group": "architecture" },
+
+  { "slug": "react", "name": "React", "group": "frontend" },
+  { "slug": "nextjs", "name": "Next.js", "group": "frontend" },
+  { "slug": "javascript", "name": "JavaScript", "group": "frontend" },
+
+  { "slug": "java", "name": "Java", "group": "other_languages" },
+  { "slug": "python", "name": "Python", "group": "other_languages" },
+  { "slug": "c", "name": "C", "group": "other_languages" },
+  { "slug": "cpp", "name": "C++", "group": "other_languages" },
+  { "slug": "rust", "name": "Rust", "group": "other_languages" },
+
+  { "slug": "assembly", "name": "Assembly", "group": "systems" },
+  { "slug": "memory-management", "name": "memory management", "group": "systems" },
+  { "slug": "cpu-architecture", "name": "CPU architecture", "group": "systems" },
+  { "slug": "os-concepts", "name": "OS concepts", "group": "systems" },
+
+  { "slug": "chalk", "name": "chalk", "group": "backend" },
+  { "slug": "sequelize", "name": "Sequelize", "group": "databases" },
+  { "slug": "mysql", "name": "MySQL", "group": "databases" },
+  { "slug": "stripe", "name": "Stripe", "group": "backend" },
+  { "slug": "mui", "name": "MUI", "group": "frontend" }
+]

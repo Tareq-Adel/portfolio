@@ -1,0 +1,126 @@
+[
+  {
+    "slug": "coral-store",
+    "title": "CORAL Store",
+    "summary": "A full e-commerce platform: product catalog, Stripe checkout, order management, and an admin dashboard.",
+    "typeLabel": "Graduation project — built with a partner",
+    "year": 2025,
+    "coverImageUrl": null,
+    "featured": true,
+    "technologies": [
+      { "slug": "nodejs", "name": "Node.js", "group": "backend", "primary": true },
+      { "slug": "typescript", "name": "TypeScript", "group": "backend" },
+      { "slug": "express", "name": "Express", "group": "backend" },
+      { "slug": "sequelize", "name": "Sequelize", "group": "databases" },
+      { "slug": "mysql", "name": "MySQL", "group": "databases" },
+      { "slug": "stripe", "name": "Stripe", "group": "backend" },
+      { "slug": "react", "name": "React", "group": "frontend" },
+      { "slug": "mui", "name": "MUI", "group": "frontend" }
+    ],
+    "problem": "The thesis goal was an e-commerce platform addressing the limitations of traditional retail with a scalable, secure, seamless shopping experience.",
+    "role": "Bachelor thesis, co-built with a partner (mohanadft) -- backend and data layer.",
+    "teamSize": 2,
+    "decisions": [
+      "Sequelize + MySQL for relational product/order data.",
+      "JWT + Passport for authentication.",
+      "Stripe for payments.",
+      "Cloudinary for image hosting.",
+      "Joi for request validation."
+    ],
+    "outcome": "Admin dashboard with analytics, Stripe checkout, order cancellation & refunds, and Google Maps integration on the frontend.",
+    "repoUrl": null,
+    "liveUrl": null,
+    "publishedAt": "2025-05-24T00:00:00.000Z"
+  },
+  {
+    "slug": "git-branch-cli",
+    "title": "Git Branch CLI",
+    "summary": "Interactive terminal tool for switching Git branches without memorizing names.",
+    "typeLabel": "Personal tool",
+    "year": 2025,
+    "coverImageUrl": null,
+    "featured": false,
+    "technologies": [
+      { "slug": "nodejs", "name": "Node.js", "group": "backend", "primary": true },
+      { "slug": "typescript", "name": "TypeScript", "group": "backend" },
+      { "slug": "chalk", "name": "chalk", "group": "backend" }
+    ],
+    "problem": "Typing out full branch names and running git checkout by hand is slow and error-prone, especially with long remote branch names.",
+    "role": "Built solo, published as a global npm CLI.",
+    "teamSize": 1,
+    "decisions": [
+      "Hand-rolled the arrow-key terminal navigation instead of pulling in a prompt library.",
+      "Remote branch checkout creates a properly tracked local branch instead of leaving the user in a detached HEAD."
+    ],
+    "outcome": "A global `mycheck` command that works in any local git repository.",
+    "repoUrl": null,
+    "liveUrl": null,
+    "publishedAt": "2025-10-11T21:34:13.000Z"
+  },
+  {
+    "slug": "arsl-hospital-platform",
+    "title": "ARSL — Hospital Patient Platform",
+    "summary": "A platform for a hospital to provide medical services and support patients remotely.",
+    "typeLabel": "Client project",
+    "year": null,
+    "coverImageUrl": null,
+    "featured": false,
+    "technologies": [
+      { "slug": "nodejs", "name": "Node.js", "group": "backend", "primary": true },
+      { "slug": "nestjs", "name": "NestJS", "group": "backend" },
+      { "slug": "react", "name": "React", "group": "frontend" }
+    ],
+    "problem": "Patients needed a way to reach the hospital without an in-person visit for every question, consultation, or scheduling need.",
+    "role": "Backend services (NestJS) powering patient chat, calls, and appointment booking, plus the React frontend.",
+    "teamSize": null,
+    "decisions": [],
+    "outcome": "Patients can message and call hospital staff directly, and view and book doctor appointments online.",
+    "repoUrl": null,
+    "liveUrl": null,
+    "publishedAt": null
+  },
+  {
+    "slug": "org-task-distribution",
+    "title": "Organization Task Distribution System",
+    "summary": "Backend services and data-management modules for distributing work across an organization.",
+    "typeLabel": "Professional project — Areisto",
+    "year": 2025,
+    "coverImageUrl": null,
+    "featured": false,
+    "technologies": [{ "slug": "nodejs", "name": "Node.js", "group": "backend", "primary": true }],
+    "problem": "Enterprise teams needed a structured way to assign and track tasks across the organization rather than managing it ad hoc.",
+    "role": "Software Engineering Trainee, as part of the Graduates Empowerment Program – Season 2.",
+    "teamSize": null,
+    "decisions": [
+      "Structured the codebase with MVC and Domain-Driven Design to keep business logic isolated, testable, and ready to scale."
+    ],
+    "outcome": null,
+    "repoUrl": null,
+    "liveUrl": null,
+    "publishedAt": "2025-07-31T00:00:00.000Z"
+  },
+  {
+    "slug": "problem-solving-algorithms",
+    "title": "Problem Solving & Algorithms",
+    "summary": "Solutions to a range of coding and algorithmic problems.",
+    "typeLabel": "Practice repository",
+    "year": null,
+    "coverImageUrl": null,
+    "featured": false,
+    "technologies": [
+      { "slug": "javascript", "name": "JavaScript", "group": "frontend" },
+      { "slug": "typescript", "name": "TypeScript", "group": "backend" },
+      { "slug": "java", "name": "Java", "group": "other_languages" },
+      { "slug": "rust", "name": "Rust", "group": "other_languages" },
+      { "slug": "python", "name": "Python", "group": "other_languages" }
+    ],
+    "problem": "Not applicable -- a practice repository of solved problems, not a product built around a user problem.",
+    "role": null,
+    "teamSize": null,
+    "decisions": [],
+    "outcome": null,
+    "repoUrl": null,
+    "liveUrl": null,
+    "publishedAt": null
+  }
+]
