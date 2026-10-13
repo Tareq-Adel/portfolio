@@ -8,6 +8,18 @@ interface ContactMessage {
 
 const RESEND_API_URL = 'https://api.resend.com/emails';
 
+// Minimal shape of what we actually use from the Fetch API's Response.
+// Some build environments (observed on Vercel) resolve the ambient
+// `Response` type to something else entirely, so we cast through this
+// instead of relying on it -- the real fetch() always returns an object
+// with these fields at runtime regardless of what TypeScript thinks its
+// name means in a given environment.
+interface FetchResponseLike {
+  ok: boolean;
+  status: number;
+  text(): Promise<string>;
+}
+
 /**
  * Sends the owner a notification email via Resend (FR-5.3). Falls back to
  * logging instead of sending when RESEND_API_KEY isn't configured, so local
@@ -26,7 +38,7 @@ export async function sendContactEmail(message: ContactMessage): Promise<void> {
     return;
   }
 
-  const response = await fetch(RESEND_API_URL, {
+  const response = (await globalThis.fetch(RESEND_API_URL, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -39,7 +51,7 @@ export async function sendContactEmail(message: ContactMessage): Promise<void> {
       subject: `Portfolio contact: ${message.inquiryType} from ${message.name}`,
       text: `From: ${message.name} <${message.email}>\nType: ${message.inquiryType}\nLocale: ${message.locale}\n\n${message.message}`,
     }),
-  });
+  })) as unknown as FetchResponseLike;
 
   if (!response.ok) {
     const body = await response.text();
