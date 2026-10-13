@@ -2,7 +2,7 @@ import './env.js';
 
 import { randomUUID } from 'node:crypto';
 
-import express from 'express';
+import express, { type Express } from 'express';
 
 import { allowedOrigins } from './config.js';
 import { contactRouter } from './routes/contact.js';
@@ -11,7 +11,7 @@ import { profileRouter } from './routes/profile.js';
 import { projectsRouter } from './routes/projects.js';
 import { technologiesRouter } from './routes/technologies.js';
 
-const app = express();
+const app: Express = express();
 const port = process.env.PORT ?? 3001;
 const startedAt = Date.now();
 
@@ -68,6 +68,14 @@ app.use('/api/v1', technologiesRouter);
 app.use('/api/v1', experienceRouter);
 app.use('/api/v1', projectsRouter);
 
-app.listen(port, () => {
-  console.log(`portfolio-api listening on http://localhost:${port}`);
-});
+// On Vercel, the platform imports this module and calls the exported app
+// directly as a serverless function -- it never runs our own app.listen().
+// Locally (tsx watch / node dist/index.js) and on Render, VERCEL isn't set,
+// so we start a real server as before.
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`portfolio-api listening on http://localhost:${port}`);
+  });
+}
+
+export default app;

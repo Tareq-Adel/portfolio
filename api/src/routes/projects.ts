@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { Router } from 'express';
 import { z } from 'zod';
@@ -30,8 +30,10 @@ interface Project {
   publishedAt: string | null;
 }
 
+// Resolved relative to this module's own location, not process.cwd() --
+// see profile.ts for why.
 const projects: Project[] = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'content', 'projects.json'), 'utf-8'),
+  readFileSync(fileURLToPath(new URL('../../content/projects.json', import.meta.url)), 'utf-8'),
 );
 
 const slugSchema = z

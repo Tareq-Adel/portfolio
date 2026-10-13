@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { Router } from 'express';
 import { z } from 'zod';
@@ -15,8 +15,10 @@ interface Experience {
   highlights: string[];
 }
 
+// Resolved relative to this module's own location, not process.cwd() --
+// see profile.ts for why.
 const experience: Experience[] = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'content', 'experience.json'), 'utf-8'),
+  readFileSync(fileURLToPath(new URL('../../content/experience.json', import.meta.url)), 'utf-8'),
 );
 
 const querySchema = z.object({
