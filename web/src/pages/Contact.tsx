@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
+// In production the API is same-origin (Vercel routes /api/* to the api
+// service -- see vercel.json), so no base URL is needed, just a relative
+// path. Locally the two run as separate dev servers on different ports.
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://localhost:3001' : '');
 
 const inquiryTypes = [
   { value: 'job', label: 'Job opportunity' },
