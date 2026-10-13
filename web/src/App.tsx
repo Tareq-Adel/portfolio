@@ -1,3 +1,5 @@
+import { SpeedInsights } from '@vercel/speed-insights/react';
+
 import ContactBar from './components/ContactBar';
 import Divider from './components/Divider';
 import Footer from './components/Footer';
@@ -22,6 +24,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <SpeedInsights />
     </div>
   );
 }
