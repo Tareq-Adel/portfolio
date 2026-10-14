@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
 import { Router } from 'express';
 import { z } from 'zod';
@@ -7,9 +7,9 @@ import { z } from 'zod';
 // Resolved relative to this module's own location (not process.cwd()) so it
 // works the same under tsx (src/routes/*.ts), the compiled build
 // (dist/routes/*.js), and serverless bundlers like Vercel's, which trace
-// static new URL(..., import.meta.url) expressions to include the file.
+// static join(__dirname, ...) expressions to include the file.
 const profile: unknown = JSON.parse(
-  readFileSync(fileURLToPath(new URL('../../content/profile.json', import.meta.url)), 'utf-8'),
+  readFileSync(join(__dirname, '../../content/profile.json'), 'utf-8'),
 );
 
 const langQuerySchema = z.object({

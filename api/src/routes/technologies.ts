@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
 import { Router } from 'express';
 import { z } from 'zod';
@@ -14,10 +14,10 @@ interface Technology {
 // Resolved relative to this module's own location, not process.cwd() --
 // see profile.ts for why.
 const technologies: Technology[] = JSON.parse(
-  readFileSync(fileURLToPath(new URL('../../content/technologies.json', import.meta.url)), 'utf-8'),
+  readFileSync(join(__dirname, '../../content/technologies.json'), 'utf-8'),
 );
 const projects: { technologies: Technology[] }[] = JSON.parse(
-  readFileSync(fileURLToPath(new URL('../../content/projects.json', import.meta.url)), 'utf-8'),
+  readFileSync(join(__dirname, '../../content/projects.json'), 'utf-8'),
 );
 
 const techGroups = [
