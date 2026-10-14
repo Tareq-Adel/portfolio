@@ -3,7 +3,8 @@
   "services": {
     "portfolio-api": {
       "root": "api",
-      "framework": "express"
+      "framework": "express",
+      "installCommand": "pnpm install --config.node-linker=hoisted"
     },
     "web": {
       "root": "web",
